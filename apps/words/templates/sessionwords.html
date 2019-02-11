@@ -1,0 +1,96 @@
+<html>
+    <head>
+        <title>Session Words</title>
+        
+        <link rel = "stylesheet"
+        href = "https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css"
+        integrity = "sha384-WskhaSGFgHYWDcbwN70/dfYBj47jz9qbsMId/iRN3ewGhXQFZCSftd1LZCfmhktB"
+        crossorigin = "anonymous">
+        
+        <style>
+            #wrapper {
+                background-color: lightgrey;
+            }
+            #enter {
+                padding-left: 50px;
+                display: inline-block;
+                vertical-align: top;
+                width: 600px;
+                background-color: lightblue;
+                padding-bottom: 20px;
+            }
+            #display {
+                padding-left: 30px;
+                margin-top: 30px;
+                display: inline-block;
+                vertical-align: top;
+                width: 600px;
+            }
+            input [type = "text"] {
+                display: block;
+                width: 250px;
+            }
+            h2 {
+                padding-top: 30px;
+            }
+            #resetbutton {
+                margin-top: 30px;
+            }
+            div.words {
+                word-wrap: break-word;
+            }
+            a {
+                padding-top: 20px;
+                font-size: 20px;
+                color: rgb(43, 50, 94);
+            }
+        </style>
+    </head>
+
+    <body>
+        <div id = "wrapper">
+            <div id = "enter">
+                <h2>Add a new word</h2>
+                <form action = '/words/process' method = 'post'>
+                    {% csrf_token %}
+                    <input type = 'text' name = 'newword'>
+                    <br>
+                    <br>
+                    <h4>Choose color</h4>
+                    <input type = "hidden" name = "color" value = "black"/>
+                    <input type = "radio" name = "color" value = "black"/>
+                    <label for = "black">Black</label>
+                    <br>
+                    <input type = "radio" name = "color" value = "red"/>
+                    <label for = "red">Red</label>
+                    <br>
+                    <input type = "radio" name = "color" value = "blue"/>
+                    <label for = "red">Blue</label>
+                    <br>
+                    <input type = "radio" name = "color" value = "green"/>
+                    <label for = "red">Green</label>
+                    <br>
+                    <br>
+                    <input type = "checkbox" name = "big" value = "big">Make it big!
+                    <br>
+                    <br>
+                    <input type = 'submit' value = 'Add to Session'>
+                </form>
+                <a href = "/">Back to homepage</a>
+            </div>
+            <div id = "display">
+                <div id = "resetbutton">
+                    <form action = '/words/reset' method = 'post'>
+                        {% csrf_token %}
+                        <input type = 'submit' value = 'Clear Session'>
+                    </form>
+                </div>
+                <div class = "words">
+                    {% for word in words reversed %}
+                        {{ word|safe }}
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+    </body>
+</html>

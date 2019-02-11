@@ -1,0 +1,57 @@
+<html>
+    <head>
+        <title>Survey Form</title>
+        
+        <link rel = "stylesheet"
+        href = "https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css"
+        integrity = "sha384-WskhaSGFgHYWDcbwN70/dfYBj47jz9qbsMId/iRN3ewGhXQFZCSftd1LZCfmhktB"
+        crossorigin = "anonymous">
+        
+        <style>
+            body {
+                background-color: rgb(216, 214, 214);
+            }
+            .main {
+                background-color: rgb(193, 228, 240);
+                padding: 20px;
+                padding-bottom: 10px;
+                width: 480px;
+                margin: 0 auto;
+            }
+            .alert {
+                width: 450px;
+                margin: 0 auto;
+            }
+            .whitespace{
+                height: 10px;
+            }
+            h2 {
+                margin-bottom: 20px;
+            }
+            a{
+                margin-bottom: 10px;
+            }
+        </style>    
+    </head>
+
+    <body>
+        <div class = "whitespace"></div>
+        <div class = "alert alert-success">Thanks for submitting this form! You have
+        submitted this form <strong>{{count}}</strong> time(s) now.</div>
+        <div class = "whitespace"></div>
+        <div class = "main">
+            <h2><u>Here is what you submitted!</u></h2>
+            {% csrf_token %}
+
+            <p>Name: {{n}}</p>
+            <p>Dojo Location: {{lo}}</p>
+            <p>Favorite Language: {{la}}</p>
+            <p>Comment: {{c}}</p>
+            <br>
+            <a class = "btn" href = "/survey">Click here to go back</a>
+            <br>
+            <a class = "btn" href = "/survey/delete">Click here to reset the "submitted"
+                count and go back</a>
+        </div>
+    </body>
+</html>
